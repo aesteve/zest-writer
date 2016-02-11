@@ -4,3 +4,5 @@ bin
 .gradle
 .project
 .settings
+*.iml
+.idea

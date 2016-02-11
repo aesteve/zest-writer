@@ -13,7 +13,7 @@ public class ZipUtil {
 	static List<String> fileList;
 
 	public static void zipContent(String srcPathFolder, String destZipPathFile) {
-		fileList = new ArrayList<String>();
+		fileList = new ArrayList<>();
 		generateFileList(srcPathFolder, new File(srcPathFolder));
 		zipIt(srcPathFolder, destZipPathFile);
 	}

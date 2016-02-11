@@ -29,7 +29,7 @@ public class MainApp extends Application {
 	private Stage primaryStage;
     private BorderPane rootLayout;
     private ObservableList<ExtractFile> extracts = FXCollections.observableArrayList();
-    private ObservableMap<String, String> contents = FXCollections.observableMap(new HashMap<String,String>());
+    private ObservableMap<String, String> contents = FXCollections.observableMap(new HashMap<>());
     private ZdsHttp zdsutils;
     private MdTextController Index;
 
@@ -38,7 +38,7 @@ public class MainApp extends Application {
 	public MainApp() {
 		super();
 		Properties prop = new Properties();
-    	InputStream input = MainApp.class.getClassLoader().getResourceAsStream("config.properties");;
+    	InputStream input = MainApp.class.getClassLoader().getResourceAsStream("config.properties");
 
     	try {
 			prop.load(input);
@@ -77,12 +77,9 @@ public class MainApp extends Application {
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Zest Writer");
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent t) {
-                Platform.exit();
-                System.exit(0);
-            }
+        primaryStage.setOnCloseRequest(t -> {
+			Platform.exit();
+			System.exit(0);
         });
 
         initRootLayout();
@@ -94,7 +91,7 @@ public class MainApp extends Application {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/Root.fxml"));
-            rootLayout = (BorderPane) loader.load();
+            rootLayout = loader.load();
 
             MenuController controller = loader.getController();
             controller.setMainApp(this);
@@ -111,7 +108,7 @@ public class MainApp extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/Index.fxml"));
-            AnchorPane writerLayout = (AnchorPane) loader.load();
+            AnchorPane writerLayout = loader.load();
 
             rootLayout.setCenter(writerLayout);
 
